@@ -24,12 +24,18 @@ Use any LiteLLM model in Raycast AI without a subscription.
    > BASE_URL=http://192.168.1.X:4000/v1  # Replace X with your IP
    > ```
 
-3. **Start proxy**:
+3. **Optional build registry override** (edit `.env` only if Docker cannot reach `registry.npmjs.org`):
+   ```bash
+   # Leave unset to use the default npm registry
+   NPM_REGISTRY=https://registry.npmmirror.com/
+   ```
+
+4. **Start proxy**:
    ```bash
    docker compose up -d
    ```
 
-4. **Configure Raycast**:
+5. **Configure Raycast**:
    
    In Raycast Settings → **AI**:
    
@@ -58,6 +64,7 @@ Optional `.env` settings:
 PORT=3000                        # Proxy port (default: 3000)
 MODEL_REFRESH_INTERVAL=300000    # Model refresh interval (default: 5 min)
 PING_INTERVAL=10000              # Connection keepalive (default: 10 sec)
+NPM_REGISTRY=                    # Docker build registry override (default: https://registry.npmjs.org/)
 ```
 
 ---

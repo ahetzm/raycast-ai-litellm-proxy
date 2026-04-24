@@ -1,14 +1,17 @@
 services:
   raycast-ai-proxy:
     restart: unless-stopped
-    build: .
+    build:
+      context: .
+      args:
+        NPM_REGISTRY: ${NPM_REGISTRY:-https://registry.npmjs.org/}
     # The proxy runs on port 3000 inside the container.
     # Change the host port if needed.
     # You need to set this port in Raycast settings.
     ports:
-      - '11435:3000'
+      - "11435:3000"
     extra_hosts:
-      - 'host.docker.internal:host-gateway'
+      - "host.docker.internal:host-gateway"
     # No volumes needed - models are fetched dynamically from LiteLLM
     # volumes:
     environment:
