@@ -15,14 +15,14 @@ export class LiteLLMConnectionError extends Error {
 
 export class LiteLLMAuthError extends Error {
   constructor() {
-    super('Authentication failed. Check your API_KEY in .env file');
+    super('Authentication failed. Check your API_KEY environment variable');
     this.name = 'LiteLLMAuthError';
   }
 }
 
 export class LiteLLMNotFoundError extends Error {
   constructor() {
-    super('LiteLLM endpoints not found. Check your BASE_URL in .env file');
+    super('LiteLLM endpoints not found. Check your BASE_URL environment variable');
     this.name = 'LiteLLMNotFoundError';
   }
 }

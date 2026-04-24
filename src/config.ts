@@ -1,4 +1,3 @@
-import * as dotenv from 'dotenv';
 import { z } from 'zod/v4';
 import {
   DEFAULT_PORT,
@@ -12,7 +11,7 @@ export const Config = z.object({
   apiKey: z
     .string()
     .trim()
-    .min(1, 'API_KEY environment variable is required. Check your .env file'),
+    .min(1, 'API_KEY environment variable is required'),
   baseUrl: z
     .url('BASE_URL must be a valid URL (e.g., http://localhost:4000/v1)')
     .default(DEFAULT_BASE_URL),
@@ -22,7 +21,6 @@ export const Config = z.object({
 export type Config = z.infer<typeof Config>;
 
 export const getConfig = (): Config => {
-  dotenv.config();
   return Config.parse({
     port: process.env.PORT,
     apiKey: process.env.API_KEY,

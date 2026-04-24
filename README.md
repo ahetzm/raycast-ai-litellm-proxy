@@ -6,6 +6,8 @@ Use any LiteLLM model in Raycast AI without a subscription.
 
 **Prerequisites**: Docker + running LiteLLM server
 
+For local development, use Node.js 24+.
+
 1. **Clone and setup**:
 
    ```bash
@@ -60,6 +62,8 @@ Use any LiteLLM model in Raycast AI without a subscription.
 **Done!** Your LiteLLM models now appear in Raycast AI.
 
 ## Development
+
+`pnpm dev` and `pnpm start` automatically load `.env` when it exists via native `--env-file-if-exists` support.
 
 ```bash
 pnpm dev
