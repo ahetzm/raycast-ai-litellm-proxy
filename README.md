@@ -7,6 +7,7 @@ Use any LiteLLM model in Raycast AI without a subscription.
 **Prerequisites**: Docker + running LiteLLM server
 
 1. **Clone and setup**:
+
    ```bash
    git clone https://github.com/d-cu/raycast-ai-litellm-proxy.git
    cd raycast-ai-litellm-proxy
@@ -14,47 +15,66 @@ Use any LiteLLM model in Raycast AI without a subscription.
    ```
 
 2. **Configure** (edit `.env`):
+
    ```bash
    API_KEY=your-litellm-api-key
    BASE_URL=http://host.docker.internal:4000/v1
    ```
-   
+
    > **Common fix**: If `host.docker.internal` doesn't work, use your IP:
+   >
    > ```bash
    > BASE_URL=http://192.168.1.X:4000/v1  # Replace X with your IP
    > ```
 
-3. **Optional build registry override** (edit `.env` only if Docker cannot reach `registry.npmjs.org`):
+3. **Install dependencies**:
+
+   ```bash
+   pnpm install
+   ```
+
+4. **Optional build registry override** (edit `.env` only if Docker cannot reach `registry.npmjs.org`):
+
    ```bash
    # Leave unset to use the default npm registry
    NPM_REGISTRY=https://registry.npmmirror.com/
    ```
 
-4. **Start proxy**:
+5. **Start proxy**:
+
    ```bash
    docker compose up -d
    ```
 
-5. **Configure Raycast**:
-   
+6. **Configure Raycast**:
+
    In Raycast Settings → **AI**:
-   
+
    **Local Models section:**
    - Set **Ollama Host**: `localhost:11435`
    - Click **Sync Models** to discover your LiteLLM models
-   
+
    **Experiments section:**
    - Scroll down and enable **AI Extensions for Ollama Models**
 
 **Done!** Your LiteLLM models now appear in Raycast AI.
 
+## Development
+
+```bash
+pnpm dev
+pnpm lint
+pnpm format:check
+pnpm typecheck
+```
+
 ## Troubleshooting
 
-| Issue | Solution |
-|-------|----------|
-| Only see fallback models | Replace `host.docker.internal` with your IP in `.env` |
-| Connection refused | Use `BASE_URL=http://192.168.1.X:4000/v1` |
-| No models appear | Verify `API_KEY` and restart: `docker compose restart` |
+| Issue                    | Solution                                               |
+| ------------------------ | ------------------------------------------------------ |
+| Only see fallback models | Replace `host.docker.internal` with your IP in `.env`  |
+| Connection refused       | Use `BASE_URL=http://192.168.1.X:4000/v1`              |
+| No models appear         | Verify `API_KEY` and restart: `docker compose restart` |
 
 ## Configuration
 

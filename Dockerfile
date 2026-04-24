@@ -1,20 +1,20 @@
 FROM node:22-slim AS base
 WORKDIR /app
-COPY package*.json ./
+RUN corepack enable
+COPY package.json pnpm-lock.yaml ./
 ARG NPM_REGISTRY=https://registry.npmjs.org/
-RUN npm config set registry ${NPM_REGISTRY} \
- && npm config set replace-registry-host always \
- && npm ci --no-audit --no-fund
+RUN pnpm config set registry ${NPM_REGISTRY} \
+ && pnpm install --frozen-lockfile
 COPY . .
-RUN npm run build
+RUN pnpm run build
 
 FROM node:22-slim
 WORKDIR /app
-COPY package*.json ./
+RUN corepack enable
+COPY package.json pnpm-lock.yaml ./
 ARG NPM_REGISTRY=https://registry.npmjs.org/
 ENV NODE_ENV=production
-RUN npm config set registry ${NPM_REGISTRY} \
- && npm config set replace-registry-host always \
- && npm ci --omit=dev --no-audit --no-fund
+RUN pnpm config set registry ${NPM_REGISTRY} \
+ && pnpm install --frozen-lockfile --prod
 COPY --from=base /app/dist ./dist
-CMD ["npm", "start"]
+CMD ["pnpm", "start"]
