@@ -11,7 +11,7 @@ For local development, use Node.js 24+.
 1. **Clone and setup**:
 
    ```bash
-   git clone https://github.com/d-cu/raycast-ai-litellm-proxy.git
+   git clone https://github.com/ahetzm/raycast-ai-litellm-proxy.git
    cd raycast-ai-litellm-proxy
    cp .env.example .env
    ```
